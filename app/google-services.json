@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "711413882296",
+    "project_id": "casier-pro",
+    "storage_bucket": "casier-pro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711413882296:android:dd03b360b686851ad6434d",
+        "android_client_info": {
+          "package_name": "kavita.myappcompany.casierpro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711413882296-7lbjj23hm21hs2cb3m6qkl3d5hg3322j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ3IkzgZlQdEcylnzqPOD9SOZpBJedAlI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711413882296-7lbjj23hm21hs2cb3m6qkl3d5hg3322j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

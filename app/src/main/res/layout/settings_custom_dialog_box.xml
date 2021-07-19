@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:layout_marginTop="25dp"
+            android:text="Settings"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textColor="#323e41"/>
+
+        <Button
+            android:id="@+id/resetpwd"
+            android:layout_width="310dp"
+            android:layout_height="67dp"
+            android:layout_below="@+id/textView2"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="56dp"
+            android:text="RESET PASSWORD"
+            android:backgroundTint="#323e41"
+            android:textColor="#ffffff"/>
+
+        <Button
+            android:id="@+id/logOut"
+            android:layout_width="299dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/resetpwd"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="56dp"
+            android:backgroundTint="#323e41"
+            android:text="LOGOUT"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+
+</LinearLayout>
