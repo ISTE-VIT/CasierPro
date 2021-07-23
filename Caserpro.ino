@@ -6,10 +6,10 @@
 #define SS_PIN D4
 #define RST_PIN D3
 #define SERVO_PIN D1 //relay pin
-#define FIREBASE_HOST "casierprotesting-default-rtdb.firebaseio.com"           // Your Firebase Project URL 
-#define FIREBASE_AUTH "5NnSNhrNI2h8Q6mZTiixVXBonRNcbpodHkd7BXFn"         // Your Firebase Database Secret
-#define WIFI_SSID "VijayaVenu"           // your WiFi SSID
-#define WIFI_PASSWORD "vijayavenu2022"             // your WiFi
+#define FIREBASE_HOST "Your-project-name.firebaseio.com"           // Your Firebase Project URL 
+#define FIREBASE_AUTH "YourSecretCode"         // Your Firebase Database Secret
+#define WIFI_SSID "SSID"           // your WiFi SSID
+#define WIFI_PASSWORD "PASSWORD"             // your WiFi
 float val;
 MFRC522 mfrc522(SS_PIN, RST_PIN);
 Servo myservo;
