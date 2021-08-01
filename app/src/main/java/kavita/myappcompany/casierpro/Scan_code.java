@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.biometrics.BiometricManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
@@ -32,6 +35,9 @@ public class Scan_code extends AppCompatActivity {
     private ImageView setting;
     private FirebaseAuth mAuth;
     private static String TAG = MainActivity.class.getName();
+    private DatabaseReference rootDatbaseRef;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,9 @@ public class Scan_code extends AppCompatActivity {
         addFingerPrint = findViewById(R.id.addFingerprint_activity);
         setting = findViewById(R.id.setings_activity);
 
+        //rootDatbaseRef = FirebaseDatabase.getInstance().getReference().child("Auth");
+        //int a=1;
+        // rootDatbaseRef.setValue(a);
         addFingerPrint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +66,7 @@ public class Scan_code extends AppCompatActivity {
 
         final BiometricPrompt myBiometricPrompt = new BiometricPrompt(activity, newExecutor, new BiometricPrompt.AuthenticationCallback() {
             @Override
-            public void onAuthenticationError(int errorCode,CharSequence errString) {
+            public void onAuthenticationError(int errorCode, CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
                 if (errorCode == BiometricPrompt.ERROR_NEGATIVE_BUTTON) {
                 } else {
@@ -69,9 +78,13 @@ public class Scan_code extends AppCompatActivity {
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 Log.d(TAG, "Fingerprint recognised successfully");
+rootDatbaseRef = FirebaseDatabase.getInstance().getReference().child("number");
+                float a=1;
+                rootDatbaseRef.setValue(a);
 
-                TextView iptxt =  (TextView)  findViewById( R.id.IPAddress_activity );
-                sendMessage( iptxt.getText().toString(), "MakerTutor\n");
+
+                /*TextView iptxt = (TextView) findViewById(R.id.IPAddress_activity);
+                sendMessage(iptxt.getText().toString(), "MakerTutor\n");*/
 
 
             }
@@ -79,51 +92,59 @@ public class Scan_code extends AppCompatActivity {
             @Override
             public void onAuthenticationFailed() {
                 super.onAuthenticationFailed();
+                rootDatbaseRef = FirebaseDatabase.getInstance().getReference().child("number");
+                float b=0;
+                rootDatbaseRef.setValue(b);
                 Log.d(TAG, "Fingerprint not recognised");
+                int count =3;
+
             }
 
 
         });
-
+        int authenticators=3;
         final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
                 .setTitle("Scan your fingerprint to unlock.")
-                .setSubtitle("If you use face unlock Can be done as well")
-                .setDescription("Maker Tutor Arduino/ESP32 Project Unlock door with Fingerprint sensor from Android ")
+                .setSubtitle("Casier Pro")
+                .setDescription("Door Lock on your tips ")
                 .setNegativeButtonText("Cancel")
                 .build();
 
-        findViewById(R.id.Launch_activity).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.Unlock).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String regex = "^((25[0-5])|(2[0-4]\\d)|(1\\d\\d)|([1-9]\\d)|\\d)(\\.((25[0-5])|(2[0-4]\\d)|(1\\d\\d)|([1-9]\\d)|\\d)){3}$";
-                TextView  iptxt =  (TextView)  findViewById( R.id.IPAddress_activity );
-                AlertDialog.Builder builder = new AlertDialog.Builder(Scan_code.this);
+
+
+                rootDatbaseRef = FirebaseDatabase.getInstance().getReference().child("number");
+                float b=0;
+                rootDatbaseRef.setValue(b);
+                //String regex = "^((25[0-5])|(2[0-4]\\d)|(1\\d\\d)|([1-9]\\d)|\\d)(\\.((25[0-5])|(2[0-4]\\d)|(1\\d\\d)|([1-9]\\d)|\\d)){3}$";
+                //TextView  iptxt =  (TextView)  findViewById( R.id.IPAddress_activity );
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(Scan_code.this);
                 builder.setCancelable(false);
-                builder.setMessage("Enter esp32 ip address." );
+                builder.setMessage("Scan to Unlock");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Do something
                     }
-                });
+                });*/
 
-                if( iptxt.getText().toString().matches(regex)  ){
 
-                    myBiometricPrompt.authenticate(promptInfo);
-                    Log.d(TAG, "Test send data to esp32");
-                }else {
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                myBiometricPrompt.authenticate(promptInfo);
+                Log.d(TAG, "Test send data to esp32");
 
-                };
+                /*AlertDialog dialog = builder.create();
+                dialog.show();*/
 
             }
+
+
+
         });
-
-
 
     }
 
-    private void sendMessage(final String ip , final String msg) {
+    private void sendMessage(final String ip, final String msg) {
 
         Runnable runSend = new Runnable() {
             public void run() {
@@ -138,8 +159,7 @@ public class Scan_code extends AppCompatActivity {
                     out.flush();
                     Handler refresh = new Handler(Looper.getMainLooper());
                     refresh.post(new Runnable() {
-                        public void run()
-                        {
+                        public void run() {
                             //txtStatus.setText("Message has been sent.");
                             //etxtMessage.setText("");
                         }
@@ -159,15 +179,13 @@ public class Scan_code extends AppCompatActivity {
                 final String string = str;
                 Handler refresh = new Handler(Looper.getMainLooper());
                 refresh.post(new Runnable() {
-                    public void run()
-                    {
+                    public void run() {
                         //txtStatus.setText(string);
                     }
                 });
             }
         };
         new Thread(runSend).start();
-
 
 
     }

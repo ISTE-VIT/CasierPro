@@ -35,11 +35,13 @@ View view;
     private MainActivity mainActivity;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
+    Login activity;
 
 
     public Login() {
         // Required empty public constructor
     }
+
 
 
 

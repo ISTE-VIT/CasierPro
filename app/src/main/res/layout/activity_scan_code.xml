@@ -8,45 +8,27 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="148dp"
-        android:layout_height="125dp"
-        android:layout_marginBottom="40dp"
+        android:layout_width="131dp"
+        android:layout_height="94dp"
         android:src="@drawable/fingerprint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addFingerprint_activity"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="228dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="508dp"
-        android:text="SCAN HERE TO UNLOCK YOUR DOOR"
-        android:textAlignment="center"
-        android:textColor="#323e41"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.409"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintVertical_bias="0.464" />
 
     <Button
         android:id="@+id/addFingerprint_activity"
         android:layout_width="286dp"
         android:layout_height="63dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#323e41"
         android:text="ADD FINGERPRINT"
         android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Launch_activity" />
+        app:layout_constraintTop_toBottomOf="@+id/Unlock" />
 
     <ImageView
         android:id="@+id/setings_activity"
@@ -56,17 +38,6 @@
         android:src="@drawable/ic_baseline_settings_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.955"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/firebaseid_activity"
-        android:layout_width="178dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="24dp"
-        android:hint="firebaseId"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.433"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,39 +56,39 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:visibility="gone"/>
 
     <Button
-        android:id="@+id/Launch_activity"
+        android:id="@+id/Unlock"
         android:layout_width="288dp"
         android:layout_height="61dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#323e41"
-        android:text="check fingerprint"
+        android:text="Unlock Door"
         android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/IPAddress_activity" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="309dp"
-        android:layout_height="206dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="373dp"
+        android:layout_height="278dp"
+        android:layout_marginTop="68dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/mainimage" />
+        app:srcCompat="@drawable/scanphoto" />
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="270dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="359dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7"
         app:srcCompat="@drawable/maintitle" />

@@ -23,6 +23,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
@@ -46,7 +51,7 @@ public class scan extends Fragment {
     private MainActivity mainActivity;
     private static String TAG = MainActivity.class.getName();
     FragmentActivity scan;
-
+   private DatabaseReference myRef ;
     public scan() {
         // Required empty public constructor
     }
@@ -57,6 +62,12 @@ public class scan extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_scan, container, false);
         return  v;
+
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //DatabaseReference myRef = database.getReference("Auth");
+        //DatabaseReference  myRef = FirebaseDatabase.getInstance().getReference("users");
+
+
        /* //mainActivity = (MainActivity) getActivity();
 
         Fragment activity=  fragmentScan.getActivity();
@@ -185,7 +196,25 @@ public class scan extends Fragment {
                 addFingerPrint = view.findViewById(R.id.addFingerprint);
                 setting = view.findViewById(R.id.setings);
                 mainActivity = (MainActivity) getActivity();
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Auth");
+                myRef.setValue(1);
+                // Read from the database
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        int value = dataSnapshot.getValue(int.class);
+                        Log.d(TAG, "Value is: " + value);
+                    }
 
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w(TAG, "Failed to read value.", error.toException());
+                    }
+                });
                 addFingerPrint.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
