@@ -33,12 +33,24 @@
             android:text="RESET PASSWORD"
             android:backgroundTint="#323e41"
             android:textColor="#ffffff"/>
-
         <Button
-            android:id="@+id/logOut"
+            android:id="@+id/resetSecret"
+            android:layout_width="310dp"
+            android:layout_height="67dp"
+            android:layout_below="@+id/resetpwd"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="56dp"
+            android:text="RESET SECRET PIN"
+            android:backgroundTint="#323e41"
+            android:textColor="#ffffff"/>
+        <Button
+            android:id="@+id/LogOut"
             android:layout_width="299dp"
             android:layout_height="65dp"
-            android:layout_below="@+id/resetpwd"
+            android:layout_below="@+id/resetSecret"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="56dp"

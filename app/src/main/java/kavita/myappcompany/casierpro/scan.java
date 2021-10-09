@@ -1,25 +1,20 @@
 package kavita.myappcompany.casierpro;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.biometric.BiometricPrompt;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,14 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 
 /**
@@ -239,7 +226,7 @@ public class scan extends Fragment {
                 View mView = getLayoutInflater().inflate(R.layout.settings_custom_dialog_box, null);
 
                 Button Reset = mView.findViewById(R.id.resetpwd);
-                Button LogOut = mView.findViewById(R.id.logOut);
+                Button LogOut = mView.findViewById(R.id.LogOut);
 
                 alert.setView(mView);
 

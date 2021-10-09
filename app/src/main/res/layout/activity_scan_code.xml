@@ -5,12 +5,22 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="#ffffff">
+    <FrameLayout
+        android:id="@+id/secretScanFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+    </FrameLayout>
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="131dp"
         android:layout_height="94dp"
         android:src="@drawable/fingerprint"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +37,19 @@
         android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Unlock" />
+
+    <Button
+        android:id="@+id/RFID"
+        android:layout_width="286dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="92dp"
+        android:backgroundTint="#323e41"
+        android:text="RFID Lost"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Unlock" />
 
