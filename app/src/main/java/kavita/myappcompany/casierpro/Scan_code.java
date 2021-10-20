@@ -9,8 +9,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -48,18 +50,32 @@ public class Scan_code extends AppCompatActivity {
     private ImageView setting,imageView;
     private FirebaseAuth mAuth;
     private static String TAG = MainActivity.class.getName();
-    private DatabaseReference rootDatbaseRef;
+    private DatabaseReference rootDatbaseRef,rootDatbaseRef1,rootDatbaseRef2,rootDatbaseRef4;
     public String q1,q2,q3,a1,a2,a3;
     public Fragment fragmentSecret;
     //SharedPreferences sharedPreferences;
     //SharedPreferences.Editor editor;
     public String pin;
     EditText pinTV, ans2, ans3, ans1;
-    public String text, Question1, Answer1, Question2, Answer2, Question3, Answer3;
+    public String text, Question1, Answer1, Question2, Answer2, Question3, Answer3,email;
     TextView textview4, textview5, textview6;
     public int counter, counter1;
     BiometricPrompt myBiometricPrompt1;
     BiometricPrompt.PromptInfo promptInfo1;
+
+    public void onStart() {
+
+        super.onStart();
+        rootDatbaseRef = FirebaseDatabase.getInstance().getReference().child("number");
+        float a = 0;
+        rootDatbaseRef.setValue(a);
+        rootDatbaseRef1 = FirebaseDatabase.getInstance().getReference().child("forgot");
+        float k = 3;
+        rootDatbaseRef1.setValue(k);
+        rootDatbaseRef2 = FirebaseDatabase.getInstance().getReference().child("duration");
+        float l = 2;
+        rootDatbaseRef2.setValue(l);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +84,7 @@ public class Scan_code extends AppCompatActivity {
         setting = findViewById(R.id.setings_activity);
         button = findViewById(R.id.RFID);
      imageView=findViewById(R.id.imageView7);
-
+        Intent intent = getIntent();
         addFingerPrint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,10 +116,15 @@ public class Scan_code extends AppCompatActivity {
                 rootDatbaseRef = FirebaseDatabase.getInstance().getReference().child("number");
                 float a = 1;
                 rootDatbaseRef.setValue(a);
+                rootDatbaseRef1 = FirebaseDatabase.getInstance().getReference().child("forgot");
+                float k = 3;
+                rootDatbaseRef1.setValue(k);
+                rootDatbaseRef2 = FirebaseDatabase.getInstance().getReference().child("duration");
+                float l = 2;
+                rootDatbaseRef2.setValue(l);
 
 
-                /*TextView iptxt = (TextView) findViewById(R.id.IPAddress_activity);
-                sendMessage(iptxt.getText().toString(), "MakerTutor\n");*/
+
 
 
             }
@@ -116,7 +137,12 @@ public class Scan_code extends AppCompatActivity {
                 rootDatbaseRef.setValue(b);
                 Log.d(TAG, "Fingerprint not recognised");
                 int count = 3;
-
+                rootDatbaseRef1 = FirebaseDatabase.getInstance().getReference().child("forgot");
+                float k = 3;
+                rootDatbaseRef1.setValue(k);
+                rootDatbaseRef2 = FirebaseDatabase.getInstance().getReference().child("duration");
+                float l = 2;
+                rootDatbaseRef2.setValue(l);
             }
 
 
@@ -284,11 +310,11 @@ getData();
                             triggerCountDown();
 
                         } else
-                            Toast.makeText(Scan_code.this, "Question3 wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Scan_code.this, "Incorrect answer. please check it once again3", Toast.LENGTH_SHORT).show();
                     else
-                        Toast.makeText(Scan_code.this, "Question2 wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Scan_code.this, "Incorrect answer. please check it once again2", Toast.LENGTH_SHORT).show();
                 else
-                    Toast.makeText(Scan_code.this, "Question1 wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Scan_code.this, "Incorrect answer. please check it once again1", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -321,7 +347,8 @@ getData();
                                 rootDatbaseRef.setValue(b);
 
                             } else {
-                                Toast.makeText(Scan_code.this, "Check Mail", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(Scan_code.this, "Check Mail", Toast.LENGTH_SHORT).show();
+                                new SendMail().execute("");
                                 triggerCountDown2();
                             }
 
@@ -350,8 +377,8 @@ getData();
 
             @Override
             public void onFinish() {
-                rootDatbaseRef = FirebaseDatabase.getInstance().getReference().child("duration");
-                rootDatbaseRef.addValueEventListener(new ValueEventListener() {
+                rootDatbaseRef4 = FirebaseDatabase.getInstance().getReference().child("duration");
+                rootDatbaseRef4.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
@@ -360,10 +387,10 @@ getData();
                             if (k == 4) {
                                 //rootDatbaseRef = FirebaseDatabase.getInstance().getReference().child("duration");
                                 float b = 2;
-                                rootDatbaseRef.setValue(b);
+                                rootDatbaseRef4.setValue(b);
                             } else {
                                 float b = 9;
-                                rootDatbaseRef.setValue(b);
+                                rootDatbaseRef4.setValue(b);
                             }
 
 
@@ -496,5 +523,44 @@ secret.setOnClickListener(new View.OnClickListener() {
         a2=MainActivity.sp.getString("answer2","");
         a3=MainActivity.sp.getString("answer3","");
 
+    }
+    private class SendMail extends AsyncTask<String, Integer, Void> {
+
+       // private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+           // progressDialog = ProgressDialog.show(getApplicationContext(), "Please wait", "Sending mail", true, false);
+            Toast.makeText(Scan_code.this, "Please wait", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Toast.makeText(Scan_code.this, "Chcek Mail", Toast.LENGTH_SHORT).show();
+        }
+
+        protected Void doInBackground(String... params) {
+            Mail m = new Mail("CasierProOfficial@gmail.com", "CasierPro@123");
+email=getIntent().getStringExtra("Email");
+            String[] toArr = {"kavipn13@gmail.com","CasierProOfficial@gmail.com"};
+            m.setTo(toArr);
+            m.setFrom("CasierProOfficial@gmail.com");
+            m.setSubject("Someone is trying to enter your house");
+            m.setBody(" Hi , \n This is mail is sent to notify you that someone is trying to enter your house. If its you, please press the button. \n Regards, Team Casier Pro");
+
+
+            try {
+                if(m.send()) {
+                    Toast.makeText(getApplicationContext(), "Email was sent successfully.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Email was not sent.", Toast.LENGTH_LONG).show();
+                }
+            } catch(Exception e) {
+                Log.e("MailApp", "Could not send email", e);
+            }
+            return null;
+        }
     }
     }
